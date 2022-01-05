@@ -1,0 +1,105 @@
+@import "fn.scss";
+.stage_draw {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .canvas {
+        width: rpx(680);
+        height: rpx(600);
+        position: absolute;
+        top: rpx(90);
+        left: rpx(10);
+    }
+
+    .countdown {
+        position: absolute;
+        top: rpx(20);
+        right: rpx(20);
+    }
+    
+    .draw_toolbar {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: rpx(72);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding: 0 rpx(40);
+
+        .undo, .redo {
+            @include size(rpx(40), rpx(30));
+        }
+        .function_bar {
+            display: flex;
+            .f_icon {
+                @include size(rpx(40), rpx(40));
+                padding: 0 rpx(10);
+            }
+        }
+        .bubble {
+            width: rpx(650);
+            height: rpx(200);
+            position: absolute;
+            left: 0;
+            bottom: rpx(-220);
+            z-index: 20;
+            background-color: #fff;
+            border-radius: rpx(20);
+            box-shadow: 0 0 rpx(10) #aaa;
+            // @include imgSlice(64, 48, 31, 42);
+            // border-style: solid;
+            // border-image-slice: 64 48 31 42 fill;
+            // border-width: rpx(50) rpx(10) rpx(10) rpx(10);
+            // box-sizing: border-box;
+
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 0 rpx(20);
+        }
+        .brush_width {
+            @include size(rpx(100), rpx(100));
+            padding: 0 rpx(15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            div {
+                border-radius: 50%;
+                background-color: #000;
+                color: #fff;
+                &.selected {
+                    background-color: #6a9ef9;
+                }
+            }
+            .s0 { @include square(12) }
+            .s1 { @include square(20) }
+            .s2 { @include square(30) }
+            .s3 { @include square(35) }
+            .s4 { @include square(40) }
+        }
+        .brush_color, .background_color {
+            @include size(rpx(100), rpx(100));
+            padding: 0 rpx(15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .child {
+                @include square(40);
+                border: 1px solid #208eff;
+                border-radius: 50%;
+                &.selected {
+                    border-width: 3px;
+                }
+            }
+        }
+    }
+    .word {
+        position: absolute;
+        top: rpx(30);
+        left: rpx(50);
+        font-size: rpx(40);
+        font-weight: 900;
+    }
+}

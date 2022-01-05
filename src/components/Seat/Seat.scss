@@ -1,0 +1,45 @@
+@import "fn.scss";
+.seat-container {
+    display: flex;
+    justify-content: space-between;
+    padding: rpx(60) rpx(20) rpx(20);
+    height: rpx(150);
+    flex-shrink: 0;
+}
+.seat {
+    @include size(rpx(100), rpx(100));
+    position: relative;
+
+    .img {
+        height: 100%;
+        width: 100%;
+        border-radius: rpx(20);
+    }
+    .score {
+        background: #fff;
+        border-radius: 50%;
+        font-size: rpx(20);
+        padding: rpx(10);
+        position: absolute;
+        top: calc(100% - 3vw);
+        right: -2vw;
+        border: 2px solid pink;
+        @include size(2vw, 2vw);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .nickname {
+        font-size: rpx(24);
+    }
+    .bubble {
+        position: absolute;
+        top: rpx(-30);
+        font-size: rpx(18);
+        text-align: center;
+        width: 100%;
+        height: rpx(50);
+        box-sizing: border-box;
+        padding-top: rpx(5);
+    }
+}

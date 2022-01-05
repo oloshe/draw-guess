@@ -1,0 +1,31 @@
+@import "fn.scss";
+.chat_content {
+    flex-grow: 1;
+    min-height: 80px;
+    overflow: scroll;
+    padding: 0 rpx(20);
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    .chat_item {
+        padding: rpx(20) rpx(10);
+        white-space: pre-wrap;
+        word-break: break-all;
+        font-size: rpx(30);
+        .avatar {
+            display: inline;
+            vertical-align: middle;
+            @include size(rpx(40), rpx(40));
+            border-radius: 50%;
+            flex-shrink: 0;
+            background-color: #999;
+        }
+        .nick {
+            margin-left: rpx(20);
+            vertical-align: middle;
+        }
+        .content {
+            vertical-align: middle;
+        }
+    }
+}

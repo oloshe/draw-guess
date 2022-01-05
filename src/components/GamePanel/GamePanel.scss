@@ -1,0 +1,60 @@
+@import "fn.scss";
+.game_panel {
+    width: rpx(700);
+    height: rpx(760);
+    margin: 0 auto;
+    position: relative;
+    flex-shrink: 0;
+}
+.bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.settlement {
+    position: fixed;
+    width: rpx(650);
+    height: 75vh;
+    top: rpx(200);
+    left: rpx(50);
+    background-color: #fff;
+    box-sizing: border-box;
+    z-index: 100;
+    box-shadow: 0 0 10px #aaa;
+    border-radius: rpx(20);
+    text-align: center;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    h1 {
+        font-size: rpx(50);
+    }
+    .item {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        width: 90%;
+        padding: rpx(20) rpx(30);
+        border-bottom: 1px solid #ccc;
+    }
+    .avatar {
+        @include square(80);
+        border-radius: 20%;
+    }
+    .nick {
+        font-size: rpx(40);
+        margin: 0 rpx(20);
+    }
+    .score {
+        margin-left: auto;
+    }
+    .cls-btn {
+        margin: auto 0 rpx(20);
+    }
+}

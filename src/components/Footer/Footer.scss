@@ -1,0 +1,43 @@
+@import "fn.scss";
+.footer {
+    display: flex;
+    align-items: center;
+    padding: rpx(20) rpx(20);
+    flex-shrink: 0;
+    position: relative;
+    .footer-input {
+        position: relative;
+        z-index: 20;
+        width: rpx(450);
+        flex: 1;
+        border-radius: rpx(50);
+        border: 2px solid #999;
+        height: rpx(50);
+        font-size: rpx(30);
+        padding: rpx(10) rpx(20);
+        &:focus {
+            border: 2px solid #5469e4;
+            outline: none;
+            box-shadow: 0 0 rpx(10) #5469e4;
+        }
+    }
+    .emoji {
+        margin-left: rpx(20);
+        position: relative;
+        z-index: 20;
+    }
+    .emoji_picker {
+        position: absolute;
+        top: -320px;
+        right: 20px;
+        z-index: 20;
+    }
+}
+.emoji_mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+}

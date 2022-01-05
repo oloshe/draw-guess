@@ -1,0 +1,17 @@
+@function rpx($px) {
+    @return ($px / 750) * 100vw;
+}
+@mixin size($w, $h) {
+    width: $w;
+    height: $h;
+}
+@mixin square($l) {
+    @include size(rpx($l), rpx($l));
+}
+
+// @mixin imgSlice($top, $right, $bottom, $left) {
+//     border-style: solid;
+//     border-image-slice: $top $right $bottom $left fill;
+//     border-width: rpx($top) rpx($right) rpx($bottom) rpx($left);
+//     box-sizing: border-box;
+// }

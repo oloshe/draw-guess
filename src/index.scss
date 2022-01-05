@@ -1,3 +1,5 @@
+@import "fn.scss";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +12,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+* { touch-action: manipulation; }
+
+.icon{
+  @include size(rpx(50), rpx(50));
+}
+
+.bg100 {
+  background-size: 100% 100%;
+}
+
+.countdown {
+  font-size: rpx(40);
+  font-weight: 700;
 }

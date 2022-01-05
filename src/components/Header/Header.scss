@@ -1,0 +1,25 @@
+@import "fn.scss";
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: rpx(20) rpx(30);
+    flex-shrink: 0;
+    .room {
+        font-size: rpx(25);
+        margin-left: rpx(20);
+        font-weight: 800;
+        margin-right: auto;
+    }
+    .observer {
+        @include size(rpx(50), rpx(40));
+    }
+    .ob_num {
+        margin-left: rpx(20);
+        margin-right: rpx(40);
+        font-size: rpx(24);
+    }
+    .store {
+        margin-right: rpx(50);
+    }
+}

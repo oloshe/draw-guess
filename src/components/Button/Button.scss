@@ -1,0 +1,19 @@
+@import "fn.scss";
+
+.m_button {
+    width: rpx(200);
+    height: rpx(80);
+    font-size: rpx(24);
+    box-sizing: border-box;
+    padding-top: rpx(10);
+    color: #fff;
+    user-select: none;
+    cursor: pointer;
+    &:active {
+        transform: scaleY(0.95);
+        transform-origin: bottom center;
+    }
+    &.disable {
+        filter: grayscale(50%);
+    }
+}

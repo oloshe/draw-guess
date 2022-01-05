@@ -1,0 +1,27 @@
+@import "fn.scss";
+
+.stage_ready {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        font-size: rpx(40);
+        margin-top: rpx(70);
+    }
+    h2 {
+        font-size: rpx(34);
+    }
+    p {
+        font-size: rpx(20);
+        line-height: 1;
+        margin: rpx(10) 0;
+    }
+    .btn_view {
+        margin-top: auto;
+        margin-bottom: rpx(100);
+        display: flex;
+        justify-content: space-evenly;
+    }
+}

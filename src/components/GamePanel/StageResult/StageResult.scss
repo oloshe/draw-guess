@@ -1,0 +1,14 @@
+@import "fn.scss";
+.stage_result {
+    .toolbar {
+        justify-content: flex-end;
+        box-sizing: border-box;
+        padding: 0 rpx(40);
+        img {
+            @include square(50);
+        }
+        .download {
+            margin-right: rpx(20);
+        }
+    }
+}
