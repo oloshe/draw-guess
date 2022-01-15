@@ -231,18 +231,27 @@ impl RoomData {
             let cur_id = cur_id.clone();
             let mut add_score = 0;
             let play_user_count = self.seat.iter().filter(|&a| a.is_some()).count();
-            let nick_name = &self.players.get(&cur_id).unwrap().nick_name.clone();
-            let answer_str = format!("答案是【{}】，", self.word);
-            if count == play_user_count - 1 {
-                self.add_system_chat(format!("{}本轮所有玩家答对，玩家{}不得分", answer_str, nick_name))
-            } else if count == play_user_count - 2 {
-                add_score = 6;
-                self.add_system_chat(format!("{}本轮共{}名玩家答对，玩家{}得{}分", answer_str, &count, nick_name, add_score));
-            } else if count > 0 {
-                add_score = 3;
-                self.add_system_chat(format!("{}本轮共{}名玩家答对，玩家{}得{}分", answer_str, &count, nick_name, add_score));
+            let player = &self.players.get(&cur_id);
+            let nick_name: Option<String> = if let Some(player) = player {
+                Some(player.nick_name.clone())
             } else {
-                self.add_system_chat(format!("{}本轮无人答对，玩家{}不得分", answer_str, nick_name));
+                None
+            };
+            let answer_str = format!("答案是【{}】，", self.word);
+            if let Some(nick_name) = nick_name {
+                if count == play_user_count - 1 {
+                    self.add_system_chat(format!("{}本轮所有玩家答对，玩家{}不得分", answer_str, nick_name))
+                } else if count == play_user_count - 2 {
+                    add_score = 6;
+                    self.add_system_chat(format!("{}本轮共{}名玩家答对，玩家{}得{}分", answer_str, &count, nick_name, add_score));
+                } else if count > 0 {
+                    add_score = 3;
+                    self.add_system_chat(format!("{}本轮共{}名玩家答对，玩家{}得{}分", answer_str, &count, nick_name, add_score));
+                } else {
+                    self.add_system_chat(format!("{}本轮无人答对，玩家{}不得分", answer_str, nick_name));
+                }
+            } else {
+                self.add_system_chat(format!("{}本轮共{}名玩家答对，玩家因已离开不得分", answer_str, &count));
             }
             if add_score != 0 {
                 self.settlement.entry(cur_id.clone()).or_default().add_assign(add_score);

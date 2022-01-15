@@ -165,6 +165,7 @@ const StageDraw = () => {
     })
 
     hooks.usePolling((oldState, data) => {
+        // 轮训数据中有绘制数组且长度不为0则添加绘制
         if (data.drawList && data.drawList.length) {
             store.dispatch(gameActions.addDrawData(data.drawList, data.drawLength))
         } else if (oldState.game.drawLength !== data.drawLength) {
