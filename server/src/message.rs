@@ -16,6 +16,7 @@ pub struct JoinRoomMsg {
     pub player: Player,
     #[serde(rename = "roomId")]
     pub room_id: String,
+    pub token: String,
 }
 
 #[derive(Debug, Message, Deserialize)]
@@ -87,7 +88,7 @@ pub struct LeaveRoomMsg {
     pub user_id: String,
 }
 
-/// 玩家离开房间
+/// 获取所有房间
 #[derive(Debug, Message)]
 #[rtype(result = "Option<Value>")]
 pub struct GetAllRoomMsg {}
@@ -184,3 +185,8 @@ pub struct DrawChangeBackgoundMsg {
     pub user_id: String,
     pub color: String,
 }
+
+/// 查找能加入的房间，没有则返回失败
+#[derive(Debug, Message)]
+#[rtype(result = "Option<Value>")]
+pub struct FindJoinableRoomMsg {}

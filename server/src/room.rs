@@ -82,6 +82,9 @@ impl RoomData {
             settlement: Default::default(),
         }
     }
+    pub fn can_join(&self) -> bool {
+        self.stage == GameStage::Ready && !self.seat.iter().all(|a| a.is_some())
+    } 
     pub fn join_player(&mut self, player: &Player) {
         let id = player.user_id.clone();
         self.players.insert(id.clone(), player.clone());

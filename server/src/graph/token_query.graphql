@@ -1,0 +1,6 @@
+mutation {
+    createToken(email: $email, password: $password) {
+        token
+        refreshToken
+    }
+}

@@ -7,7 +7,7 @@ use serde_json::{json, Value};
 use crate::{
     message::*,
     room::{IfAllReadyResult, RoomData, RoomMeta, GameStage, CHOOSE_TIME, RESULT_TIME, DRAW_TIME},
-    wrap::{PollingProvider, WrapToValue},
+    wrap::{PollingProvider, WrapToValue}, app::GRAPHQL_CLIENT, graph::send_graphql,
 };
 
 pub struct GameActor {
@@ -70,7 +70,8 @@ impl Handler<JoinRoomMsg> for GameActor {
     type Result = bool;
 
     fn handle(&mut self, msg: JoinRoomMsg, _: &mut Self::Context) -> Self::Result {
-        let JoinRoomMsg { player, room_id } = msg;
+        let JoinRoomMsg { player, room_id, token } = msg;
+        send_graphql();
         if let Some(room) = self.rooms.get_mut(&room_id) {
             room.join_player(&player);
             self.player_room
@@ -367,5 +368,20 @@ impl Handler<DrawChangeBackgoundMsg> for GameActor {
         if let Some(room) = self.get_player_room(&msg.user_id) {
             room.set_background(&msg.user_id, &msg.color);
         }
+    }
+}
+
+impl Handler<FindJoinableRoomMsg> for GameActor {
+    type Result = Option<Value>;
+
+    fn handle(&mut self, _: FindJoinableRoomMsg, _: &mut Self::Context) -> Self::Result {
+        for (room_id, room_data) in self.rooms.iter() {
+            if room_data.can_join() {
+                return Some(json!({
+                    "roomId": room_id
+                }));
+            }
+        }
+        None
     }
 }

@@ -7,6 +7,7 @@ mod wrap;
 mod word;
 mod draw_data;
 mod log;
+mod graph;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {

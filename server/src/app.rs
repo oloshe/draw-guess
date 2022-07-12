@@ -1,5 +1,5 @@
 use actix_cors::Cors;
-use actix_web::{App, HttpResponse, HttpServer, Responder, get, web::{self, Data}, post};
+use actix_web::{App, HttpResponse, HttpServer, Responder, get, web::{self, Data}, post, client::Client, header::CONTENT_TYPE};
 use actix::{Actor, Addr};
 use log::info;
 use serde_json::json;
@@ -7,6 +7,8 @@ use crate::{actor::GameActor, message::*, wrap::{WrapMailboxErrorResponse, WrapM
 
 pub async fn run() -> std::io::Result<()> {
     let (addr, port) = ("0.0.0.0", "8000");
+
+    let client: Client = Client::builder().header(CONTENT_TYPE, "application/json").finish();
     
     HttpServer::new(move || {
         let cors = Cors::default()
@@ -18,6 +20,7 @@ pub async fn run() -> std::io::Result<()> {
             .wrap(cors)
             .app_data(Data::new(ADDR.clone()))
             .app_data(Data::new(word_engine))
+            .app_data(Data::new(client))
             .default_service(
                 web::route().to(|| HttpResponse::NotFound().finish())
             )
@@ -40,6 +43,8 @@ pub async fn run() -> std::io::Result<()> {
                 .service(undo) // 撤销
                 .service(clear) // 清空
                 .service(set_color) // 设置颜色
+                .service(random_api) // 随机进房
+                
             )
     })
         .bind(format!("{}:{}", addr, port))
@@ -188,4 +193,12 @@ async fn set_color(info: web::Query<DrawChangeBackgoundMsg>) -> impl Responder {
     ADDR.send(info.into_inner())
         .await
         .response(|_| true)
+}
+
+#[get("/findJoinableRoom")]
+/// 查找能加入的房间，没有则返回失败
+async fn random_api() -> impl Responder {
+    ADDR.send(FindJoinableRoomMsg{})
+        .await
+        .to_response()
 }
